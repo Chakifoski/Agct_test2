@@ -29,9 +29,9 @@ namespace Agct_test2
         private void buttonConnect_Click(object sender, EventArgs e)
         {
             builder.UserID = "root";
-            builder.Password = "root";
+            builder.Password = "No1LikeU.";
             builder.Server = "47.115.208.50";
-            builder.Database = "iot_agct_service";
+            builder.Database = "iot_agct_data";
             connection = new MySqlConnection(builder.ConnectionString);
             try
             {
@@ -50,22 +50,22 @@ namespace Agct_test2
         //数据查询按钮
         private void buttonQuery_Click(object sender, EventArgs e)
         {
-            string sql = "select * from data";
+            string sql = "select * from env_data";
             MySqlDataAdapter mda = new MySqlDataAdapter(sql, connection);
             DataSet ds = new DataSet();
-            mda.Fill(ds, "data");
+            mda.Fill(ds, "env_data");
             //显示数据
-            dataGridView1.DataSource = ds.Tables["data"];
+            dataGridView1.DataSource = ds.Tables["env_data"];
             connection.Close();
         }
 
         //删除数据
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            string sql = "delete from data where id = "+textBox1.Text;
+            string sql = "delete from env_data where id = " + textBox1.Text;
             MySqlDataAdapter mda = new MySqlDataAdapter(sql, connection);
             DataSet ds = new DataSet();
-            mda.Fill(ds, "data");
+            mda.Fill(ds, "env_data");
             connection.Close();
         }
     }

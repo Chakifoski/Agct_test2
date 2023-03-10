@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+using Sunny.UI.Win32;
 
 
 namespace Agct_test2
@@ -23,9 +25,9 @@ namespace Agct_test2
         {
             InitializeComponent();
             builder.UserID = "root";
-            builder.Password = "root";
+            builder.Password = "No1LikeU.";
             builder.Server = "47.115.208.50";
-            builder.Database = "iot_agct_service";
+            builder.Database = "iot_agct_data";
             connection = new MySqlConnection(builder.ConnectionString);
 
             //初始化时间
@@ -38,7 +40,8 @@ namespace Agct_test2
                 MessageBox.Show("成功连接服务器：" + builder.Server + "\n" + "成功连接数据库：" + builder.Database);
 
                 //载入数据并读取进度条
-                string my_query = "select * from data where id = 1";
+                string my_query = "SELECT * FROM env_data ORDER BY id DESC LIMIT 1";
+/*                "select * from data where id = 1"*/
                 MySqlCommand my_cmd = new MySqlCommand(my_query, connection);
                 MySqlDataReader my_dataReader = my_cmd.ExecuteReader();
 
@@ -100,7 +103,7 @@ namespace Agct_test2
                 ucledDataTime1.Value = DateTime.Now;
 
                 //载入数据并读取进度条
-                string my_query = "select * from data where id = 1";
+                string my_query = "SELECT * FROM env_data ORDER BY id DESC LIMIT 1";
                 MySqlCommand my_cmd = new MySqlCommand(my_query, connection);
                 MySqlDataReader my_dataReader = my_cmd.ExecuteReader();
 
